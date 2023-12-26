@@ -110,6 +110,13 @@ module Kimurai::BrowserBuilder
           end
         end
 
+        if size = @config[:window_size].presence
+          driver_options.args << "--width=#{size[0]}"
+          driver_options.args << "--height=#{size[1]}"
+
+          logger.debug "BrowserBuilder (selenium_firefox): enabled window_size"
+        end
+
         Capybara::Selenium::Driver.new(app, browser: :firefox, options: driver_options)
       end
 
